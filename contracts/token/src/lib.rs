@@ -18,7 +18,7 @@ enum DataKey {
 }
 
 /// Trait defining the full SoroMint token interface, including
-/// minting, burning, balance queries, and ownership management.
+/// minting, burning, balance queries, and ownership management
 pub trait TokenTrait {
     /// Initializes the token contract with an admin and metadata.
     /// Can only be called once.
