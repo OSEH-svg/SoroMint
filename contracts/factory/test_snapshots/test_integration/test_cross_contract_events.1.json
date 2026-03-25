@@ -6,8 +6,6 @@
   "auth": [
     [],
     [],
-    [],
-    [],
     []
   ],
   "ledger": {
@@ -66,7 +64,7 @@
                         "val": {
                           "vec": [
                             {
-                              "address": "CAQUDCJN26TZOWHZX3NDH5KMSF5LYMIFBZ7HPGLCEUFQAU6PRPGLEUIJ"
+                              "address": "CBYZLR6PJMVSKD77TNY25XNNIYBKRN7U4CO6L5DT4XZGHI36BG3TCRGD"
                             }
                           ]
                         }
@@ -96,7 +94,7 @@
       [
         {
           "contract_data": {
-            "contract": "CAQUDCJN26TZOWHZX3NDH5KMSF5LYMIFBZ7HPGLCEUFQAU6PRPGLEUIJ",
+            "contract": "CBYZLR6PJMVSKD77TNY25XNNIYBKRN7U4CO6L5DT4XZGHI36BG3TCRGD",
             "key": "ledger_key_contract_instance",
             "durability": "persistent"
           }
@@ -107,7 +105,7 @@
             "data": {
               "contract_data": {
                 "ext": "v0",
-                "contract": "CAQUDCJN26TZOWHZX3NDH5KMSF5LYMIFBZ7HPGLCEUFQAU6PRPGLEUIJ",
+                "contract": "CBYZLR6PJMVSKD77TNY25XNNIYBKRN7U4CO6L5DT4XZGHI36BG3TCRGD",
                 "key": "ledger_key_contract_instance",
                 "durability": "persistent",
                 "val": {
@@ -149,7 +147,7 @@
                           ]
                         },
                         "val": {
-                          "string": "Test Token"
+                          "string": "Event Test Token"
                         }
                       },
                       {
@@ -176,7 +174,7 @@
                           ]
                         },
                         "val": {
-                          "string": "TTK"
+                          "string": "ETT"
                         }
                       }
                     ]
@@ -250,5 +248,72 @@
       ]
     ]
   },
-  "events": []
+  "events": [
+    {
+      "event": {
+        "ext": "v0",
+        "contract_id": "7195c7cf4b2b250fff9b71aeddad4602a8b7f4e09de5f473e5f263a37e09b731",
+        "type_": "contract",
+        "body": {
+          "v0": {
+            "topics": [
+              {
+                "symbol": "SoroMint"
+              },
+              {
+                "symbol": "init"
+              }
+            ],
+            "data": {
+              "vec": [
+                {
+                  "address": "CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHK3M"
+                },
+                {
+                  "u32": 7
+                },
+                {
+                  "string": "Event Test Token"
+                },
+                {
+                  "string": "ETT"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "failed_call": false
+    },
+    {
+      "event": {
+        "ext": "v0",
+        "contract_id": "0000000000000000000000000000000000000000000000000000000000000002",
+        "type_": "contract",
+        "body": {
+          "v0": {
+            "topics": [
+              {
+                "symbol": "factory"
+              },
+              {
+                "symbol": "deploy"
+              }
+            ],
+            "data": {
+              "vec": [
+                {
+                  "address": "CBYZLR6PJMVSKD77TNY25XNNIYBKRN7U4CO6L5DT4XZGHI36BG3TCRGD"
+                },
+                {
+                  "address": "CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHK3M"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "failed_call": false
+    }
+  ]
 }

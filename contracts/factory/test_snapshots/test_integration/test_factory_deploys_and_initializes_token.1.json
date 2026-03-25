@@ -149,7 +149,7 @@
                           ]
                         },
                         "val": {
-                          "string": "Test Token"
+                          "string": "Integration Test Token"
                         }
                       },
                       {
@@ -176,7 +176,7 @@
                           ]
                         },
                         "val": {
-                          "string": "TTK"
+                          "string": "ITT"
                         }
                       }
                     ]

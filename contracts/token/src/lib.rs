@@ -224,7 +224,7 @@ impl token::TokenInterface for SoroMintToken {
             .get(&DataKey::Balance(from.clone()))
             .unwrap_or(0);
         if balance < amount {
-            panic!("insufficient balance to burn");
+            panic!("insufficient balance");
         }
         balance -= amount;
         e.storage()

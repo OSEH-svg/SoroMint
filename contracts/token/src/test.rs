@@ -88,7 +88,7 @@ fn test_mint_and_burn() {
 }
 
 #[test]
-#[should_panic(expected = "insufficient balance to burn")]
+#[should_panic(expected = "insufficient balance")]
 fn test_burn_insufficient_balance() {
     let (_, _, user, client) = setup();
     client.mint(&user, &100);

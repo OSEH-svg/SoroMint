@@ -7,7 +7,6 @@
     [],
     [],
     [],
-    [],
     []
   ],
   "ledger": {
@@ -66,7 +65,7 @@
                         "val": {
                           "vec": [
                             {
-                              "address": "CAQUDCJN26TZOWHZX3NDH5KMSF5LYMIFBZ7HPGLCEUFQAU6PRPGLEUIJ"
+                              "address": "CDWQDW6MUHR6V67DLPJV64B5C4XJK4SDQAYTV27YMN4GDTEY7ZSZXZ37"
                             }
                           ]
                         }
@@ -96,7 +95,7 @@
       [
         {
           "contract_data": {
-            "contract": "CAQUDCJN26TZOWHZX3NDH5KMSF5LYMIFBZ7HPGLCEUFQAU6PRPGLEUIJ",
+            "contract": "CDWQDW6MUHR6V67DLPJV64B5C4XJK4SDQAYTV27YMN4GDTEY7ZSZXZ37",
             "key": "ledger_key_contract_instance",
             "durability": "persistent"
           }
@@ -107,7 +106,7 @@
             "data": {
               "contract_data": {
                 "ext": "v0",
-                "contract": "CAQUDCJN26TZOWHZX3NDH5KMSF5LYMIFBZ7HPGLCEUFQAU6PRPGLEUIJ",
+                "contract": "CDWQDW6MUHR6V67DLPJV64B5C4XJK4SDQAYTV27YMN4GDTEY7ZSZXZ37",
                 "key": "ledger_key_contract_instance",
                 "durability": "persistent",
                 "val": {
@@ -149,7 +148,7 @@
                           ]
                         },
                         "val": {
-                          "string": "Test Token"
+                          "string": "First Token"
                         }
                       },
                       {
@@ -176,7 +175,7 @@
                           ]
                         },
                         "val": {
-                          "string": "TTK"
+                          "string": "FIRST"
                         }
                       }
                     ]

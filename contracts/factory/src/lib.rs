@@ -1,10 +1,9 @@
+#![no_std]
 /**
  * @title SoroMint Factory Contract
  * @description Factory contract for deploying SoroMint token contracts
  * @notice Enables deployment and management of token contracts on Stellar/Soroban
  */
-
-#![no_std]
 
 mod factory;
 
