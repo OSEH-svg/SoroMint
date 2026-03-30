@@ -151,6 +151,8 @@ const createTokenRouter = ({ deployRateLimiter = tokenDeploymentRateLimiter } = 
         errorMessage: error.message,
       });
 
+      notifyUser(userId, 'deploymentFailed', () => buildDeploymentFailedContent(name, error.message));
+
       throw error;
     }
   }),

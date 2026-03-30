@@ -33,6 +33,7 @@ const auditRoutes = require("./routes/audit-routes");
 const tokenRoutes = require("./routes/token-routes");
 const webhookRoutes = require("./routes/webhook-routes");
 const analyticsRoutes = require("./routes/analytics-routes");
+const notificationRoutes = require("./routes/notification-routes");
 
 const createApp = ({ authRouter = authRoutes, tokenRouter = tokenRoutes } = {}) => {
   const app = express();
@@ -51,6 +52,7 @@ const createApp = ({ authRouter = authRoutes, tokenRouter = tokenRoutes } = {}) 
   app.use("/api", auditRoutes);
   app.use("/api", tokenRouter);
   app.use("/api", analyticsRoutes);
+  app.use("/api", notificationRoutes);
   app.use("/api/auth", authRouter);
   app.use("/api", webhookRoutes);
 

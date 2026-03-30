@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 import { Wallet, Coins, Plus, List, ArrowRight, ShieldCheck } from 'lucide-react';
 import { SkeletonList, SkeletonTokenForm } from './components/Skeleton';
 import { useWalletStore, useTokenStore } from './store';
