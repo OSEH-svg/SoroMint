@@ -8,6 +8,10 @@
 require("dotenv").config();
 const envalid = require("envalid");
 const { logger } = require("../utils/logger");
+const {
+  getDefaultCorsAllowedOrigins,
+  parseAllowedOrigins,
+} = require("./cors-origins");
 
 /**
  * @notice Validates all required environment variables
@@ -70,6 +74,11 @@ function validateEnv() {
       default: 10,
       desc: "Maximum token deployments per rate limit window",
     }),
+    CORS_ALLOWED_ORIGINS: envalid.str({
+      default: getDefaultCorsAllowedOrigins(),
+      desc: "Comma-separated list of allowed frontend origins for cross-origin requests",
+      example: "https://app.example.com,https://admin.example.com",
+    }),
   }, {
     reporter: ({ errors, env }) => {
       if (Object.keys(errors).length > 0) {
@@ -78,14 +87,30 @@ function validateEnv() {
     }
   });
 
-  logger.info("Environment variables validated successfully", {
-    nodeEnv: cleanEnv.NODE_ENV,
-    port: cleanEnv.PORT,
-    mongoUri: cleanEnv.MONGO_URI ? cleanEnv.MONGO_URI.replace(/\/\/.*@/, "//***@") : undefined,
-    sorobanRpcUrls: cleanEnv.SOROBAN_RPC_URLS || cleanEnv.SOROBAN_RPC_URL,
+  let corsAllowedOrigins;
+
+  try {
+    corsAllowedOrigins = parseAllowedOrigins(cleanEnv.CORS_ALLOWED_ORIGINS);
+  } catch (error) {
+    throw new Error(`Validation Error: ${error.message}`);
+  }
+
+  const validatedConfig = Object.freeze({
+    ...cleanEnv,
+    CORS_ALLOWED_ORIGINS: corsAllowedOrigins,
   });
 
-  return cleanEnv;
+  logger.info("Environment variables validated successfully", {
+    nodeEnv: validatedConfig.NODE_ENV,
+    port: validatedConfig.PORT,
+    mongoUri: validatedConfig.MONGO_URI
+      ? validatedConfig.MONGO_URI.replace(/\/\/.*@/, "//***@")
+      : undefined,
+    sorobanRpcUrls: validatedConfig.SOROBAN_RPC_URLS || validatedConfig.SOROBAN_RPC_URL,
+    corsAllowedOrigins: validatedConfig.CORS_ALLOWED_ORIGINS,
+  });
+
+  return validatedConfig;
 }
 
 let validatedEnv = null;

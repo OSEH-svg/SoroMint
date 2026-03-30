@@ -15,6 +15,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const { securityHeaders } = require("./middleware/security-headers");
+const { createCorsOptionsDelegate } = require("./config/cors-config");
 
 const { errorHandler, notFoundHandler } = require("./middleware/error-handler");
 const {
@@ -33,13 +34,14 @@ const analyticsRoutes = require("./routes/analytics-routes");
 
 const createApp = ({ authRouter = authRoutes, tokenRouter = tokenRoutes } = {}) => {
   const app = express();
+  const corsMiddleware = cors(createCorsOptionsDelegate());
 
   app.use(securityHeaders);
-  app.use(cors());
-  app.use(express.json());
-
   app.use(correlationIdMiddleware);
   app.use(httpLoggerMiddleware);
+  app.use(corsMiddleware);
+  app.options("*", corsMiddleware);
+  app.use(express.json());
 
   setupSwagger(app);
 
