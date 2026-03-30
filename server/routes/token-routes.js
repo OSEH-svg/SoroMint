@@ -10,11 +10,7 @@ const {
   validatePagination,
   validateSearch,
 } = require("../validators/token-validator");
-const {
-  notifyUser,
-  buildTokenMintedContent,
-  buildDeploymentFailedContent,
-} = require("../services/notification-service");
+const { dispatch } = require("../services/webhook-service");
 
 const createTokenRouter = ({ deployRateLimiter = tokenDeploymentRateLimiter } = {}) => {
   const router = express.Router();
@@ -138,7 +134,7 @@ const createTokenRouter = ({ deployRateLimiter = tokenDeploymentRateLimiter } = 
         status: "SUCCESS",
       });
 
-      notifyUser(userId, 'tokenMinted', () => buildTokenMintedContent(newToken));
+      dispatch('token.minted', { tokenId: newToken._id, name, symbol, contractId, ownerPublicKey });
 
       res.status(201).json(newToken);
     } catch (error) {
