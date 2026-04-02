@@ -46,13 +46,28 @@ function validateEnv() {
       example: "https://soroban-testnet.stellar.org",
       default: "https://soroban-testnet.stellar.org",
     }),
+    HORIZON_URL: envalid.url({
+      desc: "Horizon API endpoint URL for fee stats and network data",
+      example: "https://horizon-testnet.stellar.org",
+      default: "https://horizon-testnet.stellar.org",
+    }),
     NETWORK_PASSPHRASE: envalid.str({
       default: "Test SDF Network ; September 2015",
       desc: "Stellar network passphrase",
     }),
+    HORIZON_URL: envalid.url({
+      default: "https://horizon-testnet.stellar.org",
+      desc: "Horizon server URL for event streaming",
+      example: "https://horizon-testnet.stellar.org",
+    }),
     ADMIN_SECRET_KEY: envalid.str({
       default: "",
       desc: "Optional secret key for admin bypass",
+    }),
+    SENTRY_DSN: envalid.str({
+      default: "",
+      desc: "Sentry DSN for error tracking (leave empty to disable)",
+      example: "https://<key>@o0.ingest.sentry.io/<project>",
     }),
     LOGIN_RATE_LIMIT_WINDOW_MS: envalid.num({
       default: 15 * 60 * 1000,
@@ -70,6 +85,39 @@ function validateEnv() {
       default: 10,
       desc: "Maximum token deployments per rate limit window",
     }),
+    METRICS_INTERVAL_MS: envalid.num({
+      default: 30000,
+      desc: "Resource metrics sampling interval in milliseconds",
+    }),
+    ALERT_THRESHOLD_CPU: envalid.num({
+      default: 85,
+      desc: "CPU usage % that triggers an alert (0-100)",
+    }),
+    ALERT_THRESHOLD_MEMORY: envalid.num({
+      default: 85,
+      desc: "Memory usage % that triggers an alert (0-100)",
+    }),
+    ALERT_THRESHOLD_DISK: envalid.num({
+      default: 90,
+      desc: "Disk usage % that triggers an alert (0-100)",
+    }),
+    REDIS_URL: envalid.str({
+      default: "redis://localhost:6379",
+      desc: "Redis connection URL for caching",
+      example: "redis://localhost:6379",
+    }),
+    REDIS_PASSWORD: envalid.str({
+      default: "",
+      desc: "Redis password (optional)",
+    }),
+    REDIS_DB: envalid.num({
+      default: 0,
+      desc: "Redis database number",
+    }),
+    CACHE_TTL_METADATA: envalid.num({
+      default: 3600,
+      desc: "Cache TTL (Time-To-Live) in seconds for token metadata (default: 1 hour)",
+    }),
   }, {
     reporter: ({ errors, env }) => {
       if (Object.keys(errors).length > 0) {
@@ -83,6 +131,8 @@ function validateEnv() {
     port: cleanEnv.PORT,
     mongoUri: cleanEnv.MONGO_URI ? cleanEnv.MONGO_URI.replace(/\/\/.*@/, "//***@") : undefined,
     sorobanRpcUrls: cleanEnv.SOROBAN_RPC_URLS || cleanEnv.SOROBAN_RPC_URL,
+    redisUrl: cleanEnv.REDIS_URL ? cleanEnv.REDIS_URL.replace(/:.+@/, ":***@") : undefined,
+    cacheTtlMetadata: cleanEnv.CACHE_TTL_METADATA,
   });
 
   return cleanEnv;
