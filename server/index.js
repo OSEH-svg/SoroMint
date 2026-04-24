@@ -110,7 +110,9 @@ const startServer = async () => {
   await connectDatabase();
   const app = createApp();
 
-  app.listen(env.PORT, () => {
+  const { initSocket } = require('./utils/socket');
+
+  const server = app.listen(env.PORT, () => {
     logStartupInfo(env.PORT, env.NETWORK_PASSPHRASE);
     sampler.start();
     console.log(`Server running on http://localhost:${env.PORT}`);
@@ -119,6 +121,8 @@ const startServer = async () => {
     );
     scheduleBackups();
   });
+
+  initSocket(server);
 };
 
 if (require.main === module) {
