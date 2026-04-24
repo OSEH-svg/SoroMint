@@ -6,6 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
+    "indexer": "node event-indexer-worker.js",
+    "indexer:dev": "nodemon event-indexer-worker.js",
     "test": "jest --coverage",
     "test:watch": "jest --watch",
     "lint": "eslint .",
@@ -24,6 +26,7 @@
     "envalid": "^8.0.0",
     "express": "^4.19.2",
     "express-rate-limit": "^7.5.0",
+    "express-validator": "^7.0.1",
     "jsonwebtoken": "^9.0.3",
     "knex": "^3.2.7",
     "mongoose": "^8.4.1",
