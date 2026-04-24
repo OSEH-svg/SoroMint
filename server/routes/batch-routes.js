@@ -6,6 +6,7 @@ const { validateBatch } = require('../validators/token-validator');
 const { submitBatchOperations } = require('../services/stellar-service');
 const DeploymentAudit = require('../models/DeploymentAudit');
 const { logger } = require('../utils/logger');
+const { dispatch } = require('../services/webhook-service');
 
 const router = express.Router();
 
@@ -60,6 +61,26 @@ router.post(
         })
       )
     );
+
+    // Dispatch webhooks for successful transfer and burn operations
+    batchResult.results.forEach((r, i) => {
+      if (r.status === 'SUBMITTED') {
+        const op = operations[i];
+        const eventPayload = {
+          txHash: batchResult.txHash,
+          contractId: op.contractId,
+          amount: op.amount,
+          source: sourcePublicKey,
+        };
+
+        if (op.type === 'transfer') {
+          eventPayload.destination = op.destination;
+          dispatch('token.transferred', eventPayload);
+        } else if (op.type === 'burn') {
+          dispatch('token.burned', eventPayload);
+        }
+      }
+    });
 
     const hasFailures = batchResult.results.some((r) => r.status === 'FAILED');
     const httpStatus = !batchResult.success ? 422 : hasFailures ? 207 : 200;
